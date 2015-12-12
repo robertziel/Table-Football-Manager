@@ -1,0 +1,15 @@
+connection: &connection
+  adapter: postgresql
+  encoding: unicode
+  host:     localhost
+  pool: 5
+  username: prograils
+  password:
+
+development:
+  <<: *connection
+  database: prograils_development
+
+test: &test
+  <<: *connection
+  database: prograils_test
