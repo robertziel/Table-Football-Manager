@@ -33,7 +33,10 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+gem 'carrierwave'
 gem 'devise'
+gem 'omniauth-facebook'
+gem "mini_magick"
 
 
 group :development, :test do
