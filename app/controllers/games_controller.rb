@@ -87,17 +87,16 @@ class GamesController < ApplicationController
 
   def lottery
     @game = Game.find(params[:game])
-    if current_user.id == @game.users[0].id and @game.users.length >= 2
+    if current_user.id == @game.users.where(:admin => true).take.id and @game.users.length >= 2
       @users = @game.users.sort_by &:last_played
       @users = @users.sort_by &:will
       @users.each { |x| User.update(x.id, :team_id => nil)}
       @choosed = @users[0..3].shuffle
       @choosed[0..1].each { |x| User.update(x.id, :team_id => @game.team1.id, :last_played => DateTime.now)}
       @choosed[2..3].each { |x| User.update(x.id, :team_id => @game.team2.id, :last_played => DateTime.now)}
-
     end
     respond_to do |format|
-      format.json {}
+      format.json { head :no_content }
     end
   end
 

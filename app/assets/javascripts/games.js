@@ -49,7 +49,7 @@
     };
 
     $scope.Lottery = function(gameID) {
-        $http.put(document.URL + '/lottery/?game=' + gameID).then(function(response) {
+        $http.put(document.URL + '/lottery.json?game=' + gameID).then(function(response) {
           updateData();
 
       });
