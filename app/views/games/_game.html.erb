@@ -1,0 +1,21 @@
+<h1>GAME</h1>
+
+<button type="button" name="button" ng-click="LeaveGame()">Leave game</button>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3">Game id</th>
+      <th colspan="3">Number of players</th>
+      <th colspan="3">Founder</th>
+    </tr>
+  </thead>
+
+  <tbody>
+      <tr>
+        <td colspan="3">{{Games.id}}</td>
+        <td colspan="3">{{Games.users.length}}</td>
+        <td colspan="3">{{Games.users[0].email}}</td>
+      </tr>
+  </tbody>
+</table>

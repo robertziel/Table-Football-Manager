@@ -35,10 +35,15 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 
 gem 'carrierwave'
+gem 'mini_magick'
+
 gem 'devise'
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'
-gem 'mini_magick'
+
+gem 'angularjs-rails'
+
+gem 'gon'
 
 
 group :development, :test do

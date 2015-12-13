@@ -2,10 +2,16 @@ class GamesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_game, only: [:show, :edit, :update, :destroy]
 
+
   # GET /games
   # GET /games.json
   def index
-    @games = Game.all
+    current_user.game == nil ? @games = Game.all : @games = Game.find(current_user.game.id)
+    respond_to do |format|
+      format.html
+      format.json { render :json => { :games => @games.to_json(:include => [:team1, :team2, :users]),
+        :user => current_user.game } }
+    end
   end
 
   # GET /games/1
@@ -25,16 +31,19 @@ class GamesController < ApplicationController
   # POST /games
   # POST /games.json
   def create
-    @game = Game.new(game_params)
-
+    if current_user.game == nil
+      team1 = Team.new
+      team2 = Team.new
+      team1.save
+      team2.save
+      @game = Game.new(game_params)
+      @game.team1_id = team1.id
+      @game.team2_id = team2.id
+      @game.save
+      User.update(current_user.id, :game_id => @game.id)
+    end
     respond_to do |format|
-      if @game.save
-        format.html { redirect_to @game, notice: 'Game was successfully created.' }
-        format.json { render :show, status: :created, location: @game }
-      else
-        format.html { render :new }
-        format.json { render json: @game.errors, status: :unprocessable_entity }
-      end
+      format.json { render :json => @game }
     end
   end
 
@@ -55,7 +64,8 @@ class GamesController < ApplicationController
   # DELETE /games/1
   # DELETE /games/1.json
   def destroy
-    @game.destroy
+    User.update(current_user.id, :game_id => nil, :team_id => nil)
+    @game.destroy if @game.users.length == 0
     respond_to do |format|
       format.html { redirect_to games_url, notice: 'Game was successfully destroyed.' }
       format.json { head :no_content }
@@ -72,4 +82,5 @@ class GamesController < ApplicationController
     def game_params
       params[:game]
     end
+
 end
