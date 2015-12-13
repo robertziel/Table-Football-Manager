@@ -16,6 +16,7 @@
         <td colspan="3">{{game.id}}</td>
         <td colspan="3">{{game.users.length}}</td>
         <td colspan="3">{{game.users[0].email}}</td>
+        <td colspan="3"><button ng-click="JoinGame('/games/'+game.id+'.json')">Join Game</button></td>
       </tr>
   </tbody>
 </table>

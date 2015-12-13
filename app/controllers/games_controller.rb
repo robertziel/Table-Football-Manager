@@ -51,7 +51,7 @@ class GamesController < ApplicationController
   # PATCH/PUT /games/1.json
   def update
     respond_to do |format|
-      if @game.update(game_params)
+      if User.update(current_user.id, :game_id => params[:id])
         format.html { redirect_to @game, notice: 'Game was successfully updated.' }
         format.json { render :show, status: :ok, location: @game }
       else

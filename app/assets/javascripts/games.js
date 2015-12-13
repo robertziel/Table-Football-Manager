@@ -27,7 +27,7 @@
     };
 
     $scope.JoinGame = function(url) {
-        $http.put(document.URL + '/games/' + $scope.Games.id + '.json').then(function(response) {
+        $http.put(document.URL + url).then(function(response) {
           updateData();
 
       });
