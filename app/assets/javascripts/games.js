@@ -8,6 +8,7 @@
         $http.get(document.URL + '/games.json').then(function(response) {
           $scope.Games = JSON.parse(response.data.games);
           $scope.UserData = response.data.user;
+          $scope.AdminID = ($scope.UserData !== null) ? $scope.Games.users[0].id : 0 ;
 
       });
     };
@@ -46,7 +47,12 @@
 
     $scope.show = function() {
       return ($scope.UserData === null ) ? true : false ;
-    }
+    };
+
+    $scope.yourID = gon.yourID;
+    $scope.youAdmin = function() {
+      return ($scope.AdminID === $scope.yourID) ? true : false ;
+    };
 
   }]);
 

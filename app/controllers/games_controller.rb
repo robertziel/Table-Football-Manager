@@ -6,6 +6,7 @@ class GamesController < ApplicationController
   # GET /games
   # GET /games.json
   def index
+    gon.yourID = current_user.id
     current_user.game == nil ? @games = Game.all : @games = Game.find(current_user.game.id)
     respond_to do |format|
       format.html
@@ -73,6 +74,13 @@ class GamesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to games_url, notice: 'Game was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+
+  def lottery
+    @game = Game.find(params[:gameId])
+    if current_user.id == @game.users[0].id
     end
   end
 

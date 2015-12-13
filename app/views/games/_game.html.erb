@@ -2,6 +2,10 @@
 
 <button type="button" name="button" ng-click="LeaveGame()">Leave game</button>
 
+<div class="admin" ng-show="youAdmin()">
+  <%= render "gameAdmin" %>
+</div>
+
 <table>
   <thead>
     <tr>
@@ -18,4 +22,9 @@
         <td colspan="3">{{Games.users[0].email}}</td>
       </tr>
   </tbody>
+</table>
+
+
+<table class="users" ng-repeat="user in Games.users">
+  <tr><td>{{user.email}}</td><td>{{user.will}}</td></tr>
 </table>
