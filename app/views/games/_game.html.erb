@@ -11,7 +11,7 @@
     <tr>
       <th colspan="3">Game id</th>
       <th colspan="3">Number of players</th>
-      <th colspan="3">Founder</th>
+      <th colspan="3">Admin</th>
     </tr>
   </thead>
 
@@ -19,12 +19,23 @@
       <tr>
         <td colspan="3">{{Games.id}}</td>
         <td colspan="3">{{Games.users.length}}</td>
-        <td colspan="3">{{Games.users[0].email}}</td>
+        <td colspan="3">{{FindAdminName(Games.users)}}</td>
       </tr>
   </tbody>
 </table>
 
 
+<h1>Users in this room</h1>
 <table class="users" ng-repeat="user in Games.users">
   <tr><td>{{user.email}}</td><td>{{user.will}}</td></tr>
+</table>
+
+<h1>Team 1</h1>
+<table class="team1" ng-repeat="user in Team1">
+  <tr><td>{{user.email}}</td></tr>
+</table>
+
+<h1>Team 2</h1>
+<table class="team2" ng-repeat="user in Team2">
+  <tr><td>{{user.email}}</td></tr>
 </table>

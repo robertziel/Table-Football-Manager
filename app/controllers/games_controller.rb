@@ -8,10 +8,14 @@ class GamesController < ApplicationController
   def index
     gon.yourID = current_user.id
     current_user.game == nil ? @games = Game.all : @games = Game.find(current_user.game.id)
+    @team1 = @games.team1.users if @games.try :team1
+    @team2 = @games.team2.users if @games.try :team2
     respond_to do |format|
       format.html
-      format.json { render :json => { :games => @games.to_json(:include => [:team1, :team2, :users]),
-        :user => current_user.game } }
+      format.json { render :json => { :games => @games.to_json(:include => [:users]),
+        :user => current_user.game,
+        :team1 => @team1,
+        :team2 => @team2 } }
     end
   end
 
@@ -41,7 +45,7 @@ class GamesController < ApplicationController
       @game.team1_id = team1.id
       @game.team2_id = team2.id
       @game.save
-      User.update(current_user.id, :game_id => @game.id)
+      User.update(current_user.id, :game_id => @game.id, :admin => true)
     end
     respond_to do |format|
       format.json { render :json => @game }
@@ -65,11 +69,14 @@ class GamesController < ApplicationController
   # DELETE /games/1
   # DELETE /games/1.json
   def destroy
-    User.update(current_user.id, :game_id => nil, :team_id => nil)
+    @admin = current_user.admin
+    User.update(current_user.id, :game_id => nil, :team_id => nil, :admin => false)
     if @game.users.length == 0
       Team.find(@game.team1.id).destroy
       Team.find(@game.team2.id).destroy
       @game.destroy
+    elsif @admin
+      User.update(@game.users[0].id, :admin => true)
     end
     respond_to do |format|
       format.html { redirect_to games_url, notice: 'Game was successfully destroyed.' }
@@ -79,18 +86,27 @@ class GamesController < ApplicationController
 
 
   def lottery
-    @game = Game.find(params[:gameId])
-    if current_user.id == @game.users[0].id
+    @game = Game.find(params[:game])
+    if current_user.id == @game.users[0].id and @game.users.length >= 2
+      @users = @game.users.sort_by &:last_played
+      @users = @users.sort_by &:will
+      @users.each { |x| User.update(x.id, :team_id => nil)}
+      @choosed = @users[0..3].shuffle
+      @choosed[0..1].each { |x| User.update(x.id, :team_id => @game.team1.id, :last_played => DateTime.now)}
+      @choosed[2..3].each { |x| User.update(x.id, :team_id => @game.team2.id, :last_played => DateTime.now)}
+
+    end
+    respond_to do |format|
+      format.json {}
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+
     def set_game
       @game = Game.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def game_params
       params[:game]
     end

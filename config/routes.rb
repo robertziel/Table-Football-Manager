@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :games
 
   root 'games#index'
-  get 'twitter-email' => 'users#email'
+  put 'lottery' => 'games#lottery'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

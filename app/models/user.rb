@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       if auth.provider == "twitter"
-        user.email = auth.info.nickname + "@twetter.com"
+        user.email = auth.info.nickname + "@twitter.com"
       else
         user.email = auth.info.email
       end
