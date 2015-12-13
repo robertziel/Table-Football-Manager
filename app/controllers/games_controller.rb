@@ -65,7 +65,11 @@ class GamesController < ApplicationController
   # DELETE /games/1.json
   def destroy
     User.update(current_user.id, :game_id => nil, :team_id => nil)
-    @game.destroy if @game.users.length == 0
+    if @game.users.length == 0
+      Team.find(@game.team1.id).destroy
+      Team.find(@game.team2.id).destroy
+      @game.destroy
+    end
     respond_to do |format|
       format.html { redirect_to games_url, notice: 'Game was successfully destroyed.' }
       format.json { head :no_content }

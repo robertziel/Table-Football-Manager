@@ -26,6 +26,13 @@
       });
     };
 
+    $scope.JoinGame = function(url) {
+        $http.put(document.URL + '/games/' + $scope.Games.id + '.json').then(function(response) {
+          updateData();
+
+      });
+    };
+
     //LOOP
     var loopFunction = function() {
       updateData("");
