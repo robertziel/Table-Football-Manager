@@ -89,8 +89,10 @@ class GamesController < ApplicationController
   def lottery
     @game = Game.find(params[:game])
     if current_user.id == @game.users.where(:admin => true).take.id and @game.users.length >= 2
-      @users = @game.users.sort_by &:last_played
-      @users = @users.sort_by { |a| a.will ? 0 : 1 }
+      @users = @game.users
+      choices1 = @users.reject{|x| !x.will}.sort_by &:last_played
+      choices2 = @users.reject{|x| x.will}.sort_by &:last_played
+      @users = choices1 + choices2
       @users.each { |x| User.update(x.id, :team_id => nil)}
       @choosed = @users[0..3].shuffle
       @choosed[0..1].each { |x| User.update(x.id, :team_id => @game.team1.id, :last_played => DateTime.now)}

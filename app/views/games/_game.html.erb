@@ -29,23 +29,23 @@
   </tbody>
 </table>
 
-<div class="col-lg-4">
-  <h1>Users in this room</h1>
-  <table class="users table" ng-repeat="user in Games.users">
-    <tr><td>{{user.name}}</td><td><div class="willUsers" ng-class="{willYes : user.will, willNo : !user.will}"></div></td></tr>
-  </table>
-</div>
-
 <div class="col-lg-4 col-sm-6">
   <h1>Team 1</h1>
   <table class="team1 table" ng-repeat="user in Team1">
-    <tr><td>{{user.name}}</td></tr>
+    <tr><td><img class="panelAvatar" ng-src="{{user.avatar.url}}">{{user.name}}</td><td><div class="willUsers" ng-class="{willYes : user.will, willNo : !user.will}"></div></td></tr>
   </table>
 </div>
 
 <div class="col-lg-4 col-sm-6">
   <h1>Team 2</h1>
   <table class="team2 table col-lg-4 col-md-6" ng-repeat="user in Team2">
-    <tr><td>{{user.name}}</td></tr>
+    <tr><td><img class="panelAvatar" ng-src="{{user.avatar.url}}">{{user.name}}</td><td><div class="willUsers" ng-class="{willYes : user.will, willNo : !user.will}"></div></td></tr>
+  </table>
+</div>
+
+<div class="col-lg-4">
+  <h1>Waiting list</h1>
+  <table class="users table" ng-repeat="user in Games.users | orderBy:'last_played':true">
+    <tr ng-if="user.team_id === null"><td><img class="panelAvatar" ng-src="{{user.avatar.url}}">{{user.name}}</td><td><div class="willUsers" ng-class="{willYes : user.will, willNo : !user.will}"></div></td></tr>
   </table>
 </div>
