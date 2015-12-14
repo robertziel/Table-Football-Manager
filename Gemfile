@@ -36,6 +36,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'carrierwave'
 gem 'mini_magick'
+gem 'open_uri_redirections'
 
 gem 'devise'
 gem 'omniauth-facebook'
