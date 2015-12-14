@@ -1,0 +1,69 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:300&subset=latin,latin-ext);
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+button, div {
+  -webkit-transition:0.5s linear all;
+  -moz-transition:0.5s linear all;
+  -o-transition:0.5s linear all;
+  transition:0.5s linear all;
+}
+
+html {
+  min-height: 100%;
+}
+
+body {
+  font-family: 'Open Sans';
+  background-color: rgb(0, 53, 90);
+  background: linear-gradient(to bottom, rgb(0, 53, 90) 0px, rgb(0, 88, 150) 100%) no-repeat;
+  background: -webkit-linear-gradient(to bottom, rgb(0, 53, 90) 0px, rgb(0, 88, 150) 100%) no-repeat;
+  background: -o-linear-gradient(to bottom, rgb(0, 53, 90) 0px, rgb(0, 88, 150) 100%) no-repeat;
+  background: -moz-linear-gradient(to bottom, rgb(0, 53, 90) 0px, rgb(0, 88, 150) 100%) no-repeat;
+  height: 100%;
+}
+
+
+
+.container {
+  background: -webkit-linear-gradient(rgba(5, 255, 9, 0.49), rgba(0, 171, 2, 0.49)); /* For Safari 5.1 to 6.0 */
+	background: -o-linear-gradient(rgba(5, 255, 9, 0.49), rgba(0, 171, 2, 0.49)); /* For Opera 11.1 to 12.0 */
+	background: -moz-linear-gradient(rgba(5, 255, 9, 0.49), rgba(0, 171, 2, 0.49)); /* For Firefox 3.6 to 15 */
+	background: linear-gradient(rgba(5, 255, 9, 0.49), rgba(0, 171, 2, 0.49)); /* Standard syntax */
+  background-color: rgba(0, 237, 3, 0.49);
+  border: solid 1px #24b840 !important;
+  box-shadow: 0px 5px 0px rgba(3, 146, 5, 0.9), 0px -5px 10px rgb(1, 199, 30) inset;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 100px;
+  -webkit-transform: rotateX(20deg);
+  transform: rotateX(20deg);
+}
+
+.container:hover {
+  -webkit-transform: rotateX(10deg);
+  transform: rotateX(10deg);
+  background-color: rgba(0, 237, 3, 0.69);
+  box-shadow: 0px 2px 2px rgba(3, 146, 5, 0.9), 0px 0px 5px rgb(1, 199, 30) inset;
+}
+
+.perspectiveContainer{
+  -webkit-perspective: 2000px;
+  perspective: 2000px;
+}

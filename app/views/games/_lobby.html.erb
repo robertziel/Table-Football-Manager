@@ -1,6 +1,6 @@
 <h1>Listing Games</h1>
 
-<button type="button" name="button" ng-click="CreateGame()">Create game</button>
+<button type="button" name="button" ng-click="CreateGame()" class="btn">Create game</button>
 
 <table>
   <thead>
@@ -16,7 +16,7 @@
         <td colspan="3">{{game.id}}</td>
         <td colspan="3">{{game.users.length}}</td>
         <td colspan="3">{{FindAdminName(game.users)}}</td>
-        <td colspan="3"><button ng-click="JoinGame('/games/'+game.id+'.json')">Join Game</button></td>
+        <td colspan="3"><button ng-click="JoinGame('/games/'+game.id+'.json')" class="btn">Join Game</button></td>
       </tr>
   </tbody>
 </table>

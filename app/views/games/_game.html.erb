@@ -1,6 +1,6 @@
 <h1>GAME</h1>
 
-<button type="button" name="button" ng-click="LeaveGame()">Leave game</button>
+<button type="button" name="button" ng-click="LeaveGame()" class="btn">Leave game</button>
 
 <div class="admin" ng-show="youAdmin()">
   <%= render "gameAdmin" %>
@@ -26,16 +26,16 @@
 
 
 <h1>Users in this room</h1>
-<table class="users" ng-repeat="user in Games.users">
+<table class="users table" ng-repeat="user in Games.users">
   <tr><td>{{user.email}}</td><td>{{user.will}}</td></tr>
 </table>
 
 <h1>Team 1</h1>
-<table class="team1" ng-repeat="user in Team1">
+<table class="team1 table" ng-repeat="user in Team1">
   <tr><td>{{user.email}}</td></tr>
 </table>
 
 <h1>Team 2</h1>
-<table class="team2" ng-repeat="user in Team2">
+<table class="team2 table" ng-repeat="user in Team2">
   <tr><td>{{user.email}}</td></tr>
 </table>
