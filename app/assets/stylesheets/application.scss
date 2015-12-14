@@ -117,9 +117,20 @@ nav {
   float: right;
 }
 
+.willButton:hover {
+  box-shadow: 0px 0px 20px #E2FF07, 0px 5px 10px rgba(0, 0, 0, 0.82) inset;
+  cursor:pointer;
+}
+
+.willUsers {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+}
+
 .willYes {
-  background-color: green;
-  box-shadow: 0px 0px 20px green;
+  background-color: #E2FF07;
+  box-shadow: 0px 0px 20px #E2FF07;
 }
 
 .willNo {

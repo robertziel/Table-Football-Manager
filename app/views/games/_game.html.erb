@@ -32,7 +32,7 @@
 <div class="col-lg-4">
   <h1>Users in this room</h1>
   <table class="users table" ng-repeat="user in Games.users">
-    <tr><td>{{user.name}}</td><td>{{user.will}}</td></tr>
+    <tr><td>{{user.name}}</td><td><div class="willUsers" ng-class="{willYes : user.will, willNo : !user.will}"></div></td></tr>
   </table>
 </div>
 
