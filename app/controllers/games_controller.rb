@@ -88,7 +88,7 @@ class GamesController < ApplicationController
 
   def lottery
     @game = Game.find(params[:game])
-    if current_user.id == @game.users.where(:admin => true).take.id and @game.users.length >= 2
+    if current_user.id == @game.users.where(:admin => true).take.id and @game.users.length >= 4
       @users = @game.users
       choices1 = @users.reject{|x| !x.will}.sort_by &:last_played
       choices2 = @users.reject{|x| x.will}.sort_by &:last_played

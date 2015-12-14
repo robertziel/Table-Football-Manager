@@ -7,7 +7,7 @@
   <div ng-click="ChangeWill()" class="willButton" ng-class="{willYes : UserWill, willNo : !UserWill}"></div> <p class="willText">Eager to play</p>
 </div>
 
-<div class="admin col-sm-6" ng-show="youAdmin()">
+<div class="admin col-sm-12" ng-show="youAdmin()">
   <%= render "gameAdmin" %>
 </div>
 
@@ -43,7 +43,7 @@
   </table>
 </div>
 
-<div class="col-lg-4">
+<div class="col-lg-4 col-sm-12">
   <h1>Waiting list</h1>
   <table class="users table" ng-repeat="user in Games.users | orderBy:'last_played':true">
     <tr ng-if="user.team_id === null"><td><img class="panelAvatar" ng-src="{{user.avatar.url}}">{{user.name}}</td><td><div class="willUsers" ng-class="{willYes : user.will, willNo : !user.will}"></div></td></tr>
