@@ -14,6 +14,7 @@ class GamesController < ApplicationController
       format.html
       format.json { render :json => { :games => @games.to_json(:include => [:users]),
         :user => current_user.game,
+        :will => current_user.will,
         :team1 => @team1,
         :team2 => @team2 } }
     end
@@ -95,6 +96,14 @@ class GamesController < ApplicationController
       @choosed[0..1].each { |x| User.update(x.id, :team_id => @game.team1.id, :last_played => DateTime.now)}
       @choosed[2..3].each { |x| User.update(x.id, :team_id => @game.team2.id, :last_played => DateTime.now)}
     end
+    respond_to do |format|
+      format.json { head :no_content }
+    end
+  end
+
+
+  def will
+    current_user.will == false ? User.update(current_user.id, :will => true) : User.update(current_user.id, :will => false)
     respond_to do |format|
       format.json { head :no_content }
     end

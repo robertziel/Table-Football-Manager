@@ -8,6 +8,7 @@
         $http.get(document.URL + '/games.json').then(function(response) {
           $scope.Games = JSON.parse(response.data.games);
           $scope.UserData = response.data.user;
+          $scope.UserWill = response.data.will;
           $scope.AdminID = ($scope.UserData !== null) ? FindAdminId($scope.Games.users) : 0 ;
           $scope.Team1 = response.data.team1;
           $scope.Team2 = response.data.team2;
@@ -23,7 +24,7 @@
 
     $scope.FindAdminName = function(users) {
       for (var i = 0; i <= users.length; i++) {
-        if (users[i].admin === true) { return users[i].email; }
+        if (users[i].admin === true) { return users[i].name; }
       }
     };
 
@@ -55,6 +56,13 @@
       });
     };
 
+    $scope.ChangeWill = function() {
+        $http.put(document.URL + '/will.json').then(function() {
+          updateData();
+
+      });
+    };
+
     //LOOP
     var loopFunction = function() {
       updateData("");
@@ -74,6 +82,7 @@
     $scope.youAdmin = function() {
       return ($scope.AdminID === $scope.yourID) ? true : false ;
     };
+
 
   }]);
 

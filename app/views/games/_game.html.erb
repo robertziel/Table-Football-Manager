@@ -3,6 +3,9 @@
 <div class="col-sm-6">
   <button type="button" name="button" ng-click="LeaveGame()" class="btn">Leave game</button>
 </div>
+<div class="col-sm-6" class="will">
+  <div ng-click="ChangeWill()" class="willButton" ng-class="{willYes : UserWill, willNo : !UserWill}"></div> <p class="willText">Eager to play</p>
+</div>
 
 <div class="admin col-sm-6" ng-show="youAdmin()">
   <%= render "gameAdmin" %>
@@ -29,20 +32,20 @@
 <div class="col-lg-4">
   <h1>Users in this room</h1>
   <table class="users table" ng-repeat="user in Games.users">
-    <tr><td>{{user.email}}</td><td>{{user.will}}</td></tr>
+    <tr><td>{{user.name}}</td><td>{{user.will}}</td></tr>
   </table>
 </div>
 
 <div class="col-lg-4 col-sm-6">
   <h1>Team 1</h1>
   <table class="team1 table" ng-repeat="user in Team1">
-    <tr><td>{{user.email}}</td></tr>
+    <tr><td>{{user.name}}</td></tr>
   </table>
 </div>
 
 <div class="col-lg-4 col-sm-6">
   <h1>Team 2</h1>
   <table class="team2 table col-lg-4 col-md-6" ng-repeat="user in Team2">
-    <tr><td>{{user.email}}</td></tr>
+    <tr><td>{{user.name}}</td></tr>
   </table>
 </div>

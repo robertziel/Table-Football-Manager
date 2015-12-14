@@ -18,7 +18,7 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
-button, div {
+div {
   -webkit-transition:0.5s linear all;
   -moz-transition:0.5s linear all;
   -o-transition:0.5s linear all;
@@ -31,6 +31,8 @@ html {
 
 body {
   font-family: 'Open Sans';
+  -webkit-font-smoothing: subpixel-antialiased;
+  -moz-osx-font-smoothing: subpixel-antialiased;
   background-color: rgb(0, 53, 90);
   background: linear-gradient(to bottom, rgb(0, 53, 90) 0px, rgb(0, 88, 150) 100%) no-repeat;
   background: -webkit-linear-gradient(to bottom, rgb(0, 53, 90) 0px, rgb(0, 88, 150) 100%) no-repeat;
@@ -41,6 +43,29 @@ body {
 
 h1, h2, h3, h4 {
   text-align: center;
+}
+
+nav {
+  color: white;
+}
+
+.btn {
+  background-color: rgba(0, 84, 144, 0.81);
+  color: white;
+  font-size: 20px;
+  -webkit-transition:0.2s linear all;
+  -moz-transition:0.2s linear all;
+  -o-transition:0.2s linear all;
+  transition:0.2s linear all;
+}
+
+.btn:hover {
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.82) inset;
+  color: white;
+}
+
+.table, .table > tbody > tr > td {
+  font-size: 20px;
 }
 
 .container {
@@ -71,4 +96,32 @@ h1, h2, h3, h4 {
 .perspectiveContainer{
   -webkit-perspective: 2000px;
   perspective: 2000px;
+}
+
+.will {
+  float: right;
+}
+
+.willText {
+  font-size: 20px;
+  float: right;
+  padding: 10px;
+}
+
+.willButton {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  color: white;
+  padding: 10px;
+  float: right;
+}
+
+.willYes {
+  background-color: green;
+  box-shadow: 0px 0px 20px green;
+}
+
+.willNo {
+  background-color: grey;
 }
