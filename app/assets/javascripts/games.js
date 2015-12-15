@@ -3,15 +3,19 @@
 
   app.controller('AppController', ['$http','$scope',function($http, $scope){
 
+    $scope.hide = true;
+
+    $scope.domain = window.location.href.split("/")[0] + "//" + window.location.href.split("/")[2]
 
     var updateData = function() {
-        $http.get(document.URL + '/games.json').then(function(response) {
+        $http.patch($scope.domain + '/games.json').then(function(response) {
           $scope.Games = JSON.parse(response.data.games);
           $scope.UserData = response.data.user;
           $scope.UserWill = response.data.will;
           $scope.AdminID = ($scope.UserData !== null) ? FindAdminId($scope.Games.users) : 0 ;
           $scope.Team1 = response.data.team1;
           $scope.Team2 = response.data.team2;
+          if ($scope.hide === true) {$scope.hide = false;}
 
       });
     };
@@ -29,35 +33,38 @@
     };
 
     $scope.CreateGame = function() {
-        $http.post(document.URL + '/games.json').then(function(response) {
+        $http.post($scope.domain + '/games.json').then(function(response) {
           updateData();
+          $scope.hide = true;
 
       });
     };
 
     $scope.LeaveGame = function() {
-        $http.delete(document.URL + '/games/' + $scope.Games.id + '.json').then(function(response) {
+        $http.delete($scope.domain + '/games/' + $scope.Games.id + '.json').then(function(response) {
           updateData();
+          $scope.hide = true;
 
       });
     };
 
     $scope.JoinGame = function(url) {
-        $http.put(document.URL + url).then(function(response) {
+        $http.put($scope.domain + url).then(function(response) {
           updateData();
+          $scope.hide = true;
 
       });
     };
 
     $scope.Lottery = function(gameID) {
-        $http.put(document.URL + '/lottery.json?game=' + gameID).then(function(response) {
+        $http.put($scope.domain + '/lottery.json?game=' + gameID).then(function(response) {
           updateData();
 
       });
     };
 
     $scope.ChangeWill = function() {
-        $http.put(document.URL + '/will.json').then(function() {
+        $http.put($scope.domain + '/will.json').then(function() {
           updateData();
 
       });

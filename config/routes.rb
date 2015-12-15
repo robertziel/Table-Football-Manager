@@ -1,11 +1,17 @@
 Rails.application.routes.draw do
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
-  resources :games
 
   root 'games#index'
+
+  patch 'games' => 'games#index'
+  post 'games' => 'games#create'
+  delete 'games/:id' => 'games#destroy'
+  put 'games/:id' => 'games#update'
   put 'lottery' => 'games#lottery'
   put 'will' => 'games#will'
+
+  get '*path' => redirect('/')
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

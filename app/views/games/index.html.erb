@@ -1,9 +1,8 @@
-<p id="notice"><%= notice %></p>
-
-<div class="content" ng-app="App">
-  <div class="row" ng-controller="AppController">
-    <div ng-show="show()"><%= render 'lobby' %></div>
-    <div ng-hide="show()"><%= render 'game' %></div>
-
+<div class="perspectiveContainer" ng-app="App" ng-controller="AppController">
+  <div class="container" ng-class="{containerNotHidden : !hide}">
+    <div class="row" ng-controller="AppController">
+      <div ng-show="show()"><%= render 'lobby' %></div>
+      <div ng-hide="show()"><%= render 'game' %></div>
+    </div>
   </div>
 </div>

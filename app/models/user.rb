@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
 
   validates_integrity_of  :avatar
   validates_processing_of :avatar
-  validates :name, :presence => true
+  validates_presence_of :name
 
 
   def self.from_omniauth(auth)

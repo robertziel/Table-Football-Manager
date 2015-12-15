@@ -16,23 +16,11 @@ class GamesController < ApplicationController
         :user => current_user.game,
         :will => current_user.will,
         :team1 => @team1,
-        :team2 => @team2 } }
+        :team2 => @team2 }
+      }
     end
   end
-
-  # GET /games/1
-  # GET /games/1.json
-  def show
-  end
-
-  # GET /games/new
-  def new
-    @game = Game.new
-  end
-
-  # GET /games/1/edit
-  def edit
-  end
+  
 
   # POST /games
   # POST /games.json
@@ -58,11 +46,7 @@ class GamesController < ApplicationController
   def update
     respond_to do |format|
       if User.update(current_user.id, :game_id => params[:id])
-        format.html { redirect_to @game, notice: 'Game was successfully updated.' }
-        format.json { render :show, status: :ok, location: @game }
-      else
-        format.html { render :edit }
-        format.json { render json: @game.errors, status: :unprocessable_entity }
+        format.json { head :no_content }
       end
     end
   end
@@ -80,7 +64,6 @@ class GamesController < ApplicationController
       User.update(@game.users[0].id, :admin => true)
     end
     respond_to do |format|
-      format.html { redirect_to games_url, notice: 'Game was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
