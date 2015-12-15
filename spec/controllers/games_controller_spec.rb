@@ -20,35 +20,26 @@ RSpec.describe GamesController, type: :controller do
 
 
       context "user is signed in" do
-        let(:test_user) {
-          name: "Test User",
-          email: "test@test.co",
-          password: "testpassword"
-         }
 
         before "Test user" do
-          sign_in test_user
+          user = create(:user)
+          sign_in user
           controller.stub(:user_signed_in?).and_return(true)
-          controller.stub(:current_user).and_return(test_user)
-          controller.stub(:authenticate_user!).and_return(test_user)
+          controller.stub(:current_user).and_return(user)
+          controller.stub(:authenticate_user!).and_return(user)
         end
 
         context 'user is in game' do
 
-          before do
-            controller.current_user.expect(admin?: true)#ASSIGN GAME!!!!!!
-          end
-
-          context 'user is not an admin' do
+          context 'and user is not an admin' do
             before do
-              controller.current_user.expect(admin?: false)
+              controller.current_user.stub(admin?: false)
             end
 
-            describe 'GET new' do
-              it 'redirects user to the login page' do
-                category = Game.create! valid_attributes
+            describe 'GET index' do
+              it 'successful' do
                 get :index, {}, valid_session
-                expect(controller.games).to eq([game])
+                expect(response).to be_successful
               end
             end
           end
@@ -63,45 +54,36 @@ RSpec.describe GamesController, type: :controller do
 
         context 'user is not in game' do
         end
+      end
 
 
 
 
 #TRASH!!!!!!!!!!_------------------------
-        describe "POST #create" do
-          context "with valid params" do
-            let(:params) do
-              {
-                gallery: { title: "MyTitle", user: test_user, description: "MyDesc",
-                    images_attributes: [{ title: "ImgTitle",
-                                          description: "ImgDescription",
-                                          user: test_user,
-                                          picture_file_name: 'test-image.jpg' }] }
-              }
-            end
+#        describe "POST #create" do
+#          context "with valid params" do
 
-            subject { post :create, params }
+#            it "is successful" do
+#              subject
+#              expect(response).to be_successful
+#            end
 
-            it "is successful" do
-              subject
-              expect(response).to be_successful
-            end
+#            it "creates a new Gallery" do
+#              expect{ subject }.to change{ Gallery.count }.by(1)
+#            end
 
-            it "creates a new Gallery" do
-              expect{ subject }.to change{ Gallery.count }.by(1)
-            end
+#            it "creates some new Images" do
+#              expect{ subject }.to change(Image, :count).by(1)
+#            end
 
-            it "creates some new Images" do
-              expect{ subject }.to change(Image, :count).by(1)
-            end
+#            it "redirects to the Gallery page" do
+#              subject
+#              expect(response).to redirect_to(gallery_path(Gallery.last))
+#            end
+#          end
+#        end
+#
 
-            it "redirects to the Gallery page" do
-              subject
-              expect(response).to redirect_to(gallery_path(Gallery.last))
-            end
-          end
-        end
-      end
 
 
 end
