@@ -29,7 +29,7 @@ RSpec.describe GamesController, type: :controller do
 
 
 
-    describe 'GET index' do
+    describe 'GET#index' do
       it 'successful load' do
         get :index, {}, valid_session
         expect(response).to be_successful
@@ -61,7 +61,7 @@ RSpec.describe GamesController, type: :controller do
       end
     end
 
-    describe 'POST destroy' do
+    describe 'POST#destroy' do
 
       it 'destroys game if there is one user in game' do
         post :create, format: 'json'
@@ -90,7 +90,7 @@ RSpec.describe GamesController, type: :controller do
       end
     end
 
-    describe 'PUT lottery' do
+    describe 'PUT#lottery' do
 
       it 'not create team when less than 4 users' do
         post :create, format: 'json'
@@ -140,6 +140,13 @@ RSpec.describe GamesController, type: :controller do
         end
         put :lottery, :game=> Game.last.id, format: 'json'
         expect(User.order("last_played").first.team_id).to eq(nil)
+      end
+    end
+
+    describe 'PUT#will' do
+      it 'sets will true if false' do
+        put :will, format: 'json'
+        expect(User.find(controller.current_user.id).will).to eq(true)
       end
     end
   end

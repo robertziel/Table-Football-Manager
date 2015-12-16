@@ -20,7 +20,7 @@ class GamesController < ApplicationController
       }
     end
   end
-  
+
 
   # POST /games
   # POST /games.json
