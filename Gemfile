@@ -35,8 +35,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'rails_12factor'
 gem 'travis'
 
-gem 'paperclip'
 gem 'aws-sdk'
+gem 'fog'
 
 gem 'carrierwave'
 gem 'mini_magick'
