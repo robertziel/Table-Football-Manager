@@ -113,6 +113,34 @@ RSpec.describe GamesController, type: :controller do
         put :lottery, :game=> Game.last.id, format: 'json'
         expect(User.last.team_id).to be_between(Game.last.team1_id, Game.last.team2_id)
       end
+
+      it 'one not eager in 5 players not joins' do
+        post :create, format: 'json'
+        $i = 0
+        while $i < 4  do
+          user = create(:user)
+          user.game_id = Game.last.id
+          $i != 3 ? user.will = true : user.will = false
+          user.save
+          $i += 1
+        end
+        put :lottery, :game=> Game.last.id, format: 'json'
+        expect(User.last.will).to eq(false)
+      end
+
+      it 'player out of 5 players which waits the shortest time not joins' do
+        post :create, format: 'json'
+        $i = 0
+        while $i < 4  do
+          user = create(:user)
+          user.game_id = Game.last.id
+          user.last_played = Time.now - $i.hours
+          user.save
+          $i += 1
+        end
+        put :lottery, :game=> Game.last.id, format: 'json'
+        expect(User.order("last_played").first.team_id).to eq(nil)
+      end
     end
   end
 end
