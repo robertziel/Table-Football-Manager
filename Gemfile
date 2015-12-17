@@ -34,6 +34,7 @@ gem 'travis'
 gem 'carrierwave'
 gem 'mini_magick'
 gem 'open_uri_redirections'
+gem "fog-aws"
 
 gem 'devise'
 gem 'omniauth-facebook'
